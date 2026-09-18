@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 from scipy.signal import butter, filtfilt
 import matplotlib.pyplot as plt
+import plotly.express as px
+
 
 st.title("EMG FATIGUE ANALYSIS APP")
 
@@ -24,6 +26,15 @@ if uploaded_file is not None:
 
     # Mostrar a Streamlit
     st.pyplot(fig)
+    
+
+    fig = px.line(
+        raw_EMG_data_frame,
+        y='chan1',
+        title='Senyal EMG'
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
     # pcnt0_emg = st.number_input(
     #     "Inici contracció",
     #     min_value=0,
