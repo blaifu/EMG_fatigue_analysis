@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-
+from scipy.signal import butter, filtfilt
+import matplotlib.pyplot as plt
 
 st.title("EMG FATIGUE ANALYSIS APP")
 
@@ -13,7 +14,16 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
-    raw_EMG_data_frame = pd.read_excel(uploaded_file)
+    raw_EMG_data_frame = pd.read_excel(uploaded_file) 
+    # Crear figura
+    fig, ax = plt.subplots(figsize=(12,4))
+    ax.plot(raw_EMG_data_frame['chan1'])
+    ax.set_xlabel('Mostres')
+    ax.set_ylabel('EMG')
+    ax.set_title('Senyal EMG')
+
+# Mostrar a Streamlit
+st.pyplot(fig)
     # pcnt0_emg = st.number_input(
     #     "Inici contracció",
     #     min_value=0,
