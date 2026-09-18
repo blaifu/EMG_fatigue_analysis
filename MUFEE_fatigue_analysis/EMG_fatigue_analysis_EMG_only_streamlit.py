@@ -9,7 +9,7 @@ import sys
 sys.path.append('./functions')
 import os
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.stats.stats import pearsonr
 import streamlit as st
