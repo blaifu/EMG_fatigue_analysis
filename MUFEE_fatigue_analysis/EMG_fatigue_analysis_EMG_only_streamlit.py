@@ -1,95 +1,19 @@
-
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb  7 16:04:29 2020
-
-@author: Blai
-"""
-# import sys
-# sys.path.append('./functions')
-# import os
-# import numpy as np
-# # import matplotlib.pyplot as plt
-import pandas as pd
-# from scipy.stats.stats import pearsonr
 import streamlit as st
-
-# #Own functions import
-# from data_imports import *
-# from data_parsers import *
-# from filt_func import *
-# from data_exports import *
-# from emg_functions import *
-# from plotting_functions import *
-import plotly.express as px
-# #To activate plotting using QT manager - This is needed if using Spyder IDE
-# try:
-#     import IPython
-#     shell = IPython.get_ipython()
-#     shell.enable_matplotlib(gui='qt')
-# except:
-#     pass  
+import pandas as pd
 
 
-# #To avoid FutureWarnings
-# import warnings
-# warnings.filterwarnings("ignore", category=FutureWarning)
+st.title("EMG FATIGUE ANALYSIS APP")
+
+st.markdown("""Aquesta APP serveig per fer l'anàlisi d'un fitxes d'EMG en tasques de fatiga a través de contraccions continues""")
 
 
-            
-###########CONSTANT DEFINITION############
-data_folder='./Data'
-plots_folder = './Plots'
-number_of_rows_skipped = 3
-
-
-##### Filtering constants for Force and EMG ####
-data_freq = 1000.0
-lowcut = 20.0
-highcut = 400.0
-lowcut_force = 10.0
-filter_order = 4
-
-
-time_pause = 30
-
-analysis_window = (2*data_freq) 
-export_file = './Exported_data.xlsx'
-
-
-
-##########END OF CONSTANT DEFINITION#########
-
-######MAIN#######
-# print ('Select one of the CF data files...')
-# file_list, path_list = find_files_GUI (data_folder, 'CF_FE.txt', id_list)
-#LOAD EMG FILE
-
-
-#Load raw data frame and filter data
 uploaded_file = st.file_uploader(
     "Selecciona el fitxer EMG",
     type=["xlsx"]
 )
 
 if uploaded_file is not None:
-
     raw_EMG_data_frame = pd.read_excel(uploaded_file)
-    # emg_df, emg_df_noAbs = data_filter_butterworth_emg (raw_EMG_data_frame, lowcut, highcut, data_freq, filter_order)
-
-
-    #Plot EMG and then let select 2 ginput events
-    fig = px.line(y=raw_EMG_data_frame['chan1'])
- 
-    # fig = px.line(
-    #     y=emg_df_noAbs['chan1']
-    # )
-    
-    st.plotly_chart(
-        fig,
-        use_container_width=True
-)
-
     # pcnt0_emg = st.number_input(
     #     "Inici contracció",
     #     min_value=0,
