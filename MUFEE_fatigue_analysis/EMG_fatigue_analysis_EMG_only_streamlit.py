@@ -103,8 +103,10 @@ if uploaded_file is not None:
         title='Senyal EMG'
     )
 
-    #SELECTOR FINESTRA
+
     st.plotly_chart(fig, use_container_width=True)
+    
+    #SELECTOR FINESTRA
     pcnt0_emg = st.number_input(
         "Inici contracció",
         min_value=0,
@@ -139,9 +141,18 @@ if uploaded_file is not None:
     RMS = RMS_calculation (filt_data, onsets, offsets)
     MNF, MDF = mean_median_frequency_computation (onsets, offsets, filt_data, 'chan1')
     
-    st.table(RMS)
-    st.table(MDF)
-    st.table(MNF)
+    # Crear figura
+    fig2 = px.line(
+        RMS,
+        y='chan1',
+        title='RMS EMG'
+    )
+
+
+    st.plotly_chart(fig, use_container_width=True)
+    # st.table(RMS)
+    # st.table(MDF)
+    # st.table(MNF)
     # ########EXPORTING VARIABLES#########
     
     
