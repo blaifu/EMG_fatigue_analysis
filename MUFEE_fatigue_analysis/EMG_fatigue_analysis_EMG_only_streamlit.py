@@ -38,13 +38,13 @@ if uploaded_file is not None:
     pcnt0_emg = st.number_input(
         "Inici contracció",
         min_value=0,
-        max_value=len(emg_df_noAbs)-1,
+        max_value=2000000000,
         value=1000)
     
     pcnt100_emg = st.number_input(
         "Final contracció",
         min_value=0,
-        max_value=len(emg_df_noAbs)-1,
+        max_value=20000000,
         value=5000)
     
     # emg_total_frames = pcnt100_emg - pcnt0_emg
