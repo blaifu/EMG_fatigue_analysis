@@ -66,7 +66,7 @@ def mean_median_frequency_computation (EMG_onsets, EMG_offsets, data_frame_nAbs,
         if row_num >29:
             row_num = 0
             col_num = col_num + 1
-    return mean_freq_data, median_freq_data
+    return pd.DataFrame({'x': ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%'], 'y':mean_freq_data}), pd.DataFrame({'x': ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%'], 'y':median_freq_data})
 ##################################
 ########CONSTANTS#################
 data_freq = 1000.0
@@ -137,7 +137,7 @@ if uploaded_file is not None:
     
     # #Computation of EMG Frequency variables for each contraction   
     RMS_df = RMS_calculation (filt_data, onsets, offsets)
-    MNF, MDF = mean_median_frequency_computation (onsets, offsets, filt_data, 'chan1')
+    MNF_df, MDF_df = mean_median_frequency_computation (onsets, offsets, filt_data, 'chan1')
     
     # Crear figura
     fig2 = px.line(
@@ -150,14 +150,18 @@ if uploaded_file is not None:
 
     st.plotly_chart(fig2, use_container_width=True)
     fig3 = px.line(
-        MNF,
+        MNF_df,
+        x='x',
+        y='y',
         title='MNF EMG'
     )
 
 
     st.plotly_chart(fig3, use_container_width=True)
     fig4 = px.line(
-        MDF,
+        MDF_df,
+        x='x',
+        y='y',
         title='MDF EMG'
     )
 
