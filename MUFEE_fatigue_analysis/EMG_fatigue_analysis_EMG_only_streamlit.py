@@ -149,7 +149,7 @@ if uploaded_file is not None:
     )
 
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig2, use_container_width=True)
     # st.table(RMS)
     # st.table(MDF)
     # st.table(MNF)
