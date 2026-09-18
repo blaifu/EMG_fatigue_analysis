@@ -79,9 +79,7 @@ if uploaded_file is not None:
 
 
     #Plot EMG and then let select 2 ginput events
-     fig = px.line(
-         y=raw_EMG_data_frame['chan1']
-     )
+    fig = px.line(y=raw_EMG_data_frame['chan1'])
  
     # fig = px.line(
     #     y=emg_df_noAbs['chan1']
