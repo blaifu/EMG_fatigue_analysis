@@ -36,7 +36,7 @@ def RMS_calculation (EMG_signal, computation_onsets, computation_offsets):
     analysis_window = (computation_offsets[0] - computation_onsets[0])
     for i in range(0,len(computation_onsets)):
         muscle_RMS.append ((np.sum(np.square(EMG_signal[computation_onsets[i]:computation_offsets[i]]))/analysis_window)**0.5)
-    return muscle_RMS
+    return {'x': ['0%', '20%', '40%', '60%', '80%', '100%'], 'y': muscle_RMS}
 def mean_median_frequency_computation (EMG_onsets, EMG_offsets, data_frame_nAbs, muscle):
     mean_freq_data = list()
     median_freq_data = list()
@@ -136,14 +136,14 @@ if uploaded_file is not None:
     biceps_RMS = RMS_calculation (filt_data, [pcnt0_emg, pcnt20_emg, pcnt40_emg, pcnt60_emg, pcnt80_emg], [pcnt20_emg, pcnt40_emg, pcnt60_emg, pcnt80_emg, pcnt100_emg])
     
     # #Computation of EMG Frequency variables for each contraction   
-    RMS = RMS_calculation (filt_data, onsets, offsets)
+    RMS_dict = RMS_calculation (filt_data, onsets, offsets)
     MNF, MDF = mean_median_frequency_computation (onsets, offsets, filt_data, 'chan1')
     
     # Crear figura
     fig2 = px.line(
-        RMS,
-        y=0,
-        x=['0%', '20%', '40%', '60%', '80%', '100%'],
+        RMS_dict,
+        x='x',
+        y='y',
         title='RMS EMG'
     )
 
