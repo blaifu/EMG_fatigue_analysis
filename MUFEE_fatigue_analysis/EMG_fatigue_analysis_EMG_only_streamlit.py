@@ -34,7 +34,7 @@ def RMS_calculation (EMG_signal, computation_onsets, computation_offsets):
     muscle_RMS = []
     analysis_window = (computation_offsets[0] - computation_onsets[0])/1000
     for i in range(0,len(computation_onsets)):
-        muscle_RMS.append ((np.sum(np.square(EMG_signal.iloc[computation_onsets[i]:computation_offsets[i]]))/analysis_window)**0.5)
+        muscle_RMS.append ((np.sum(np.square(EMG_signal[computation_onsets[i]:computation_offsets[i]]))/analysis_window)**0.5)
     return muscle_RMS
 def mean_median_frequency_computation (EMG_onsets, EMG_offsets, data_frame_nAbs, muscle):
     mean_freq_data = list()
