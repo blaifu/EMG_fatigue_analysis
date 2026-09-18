@@ -33,7 +33,7 @@ def data_filter_butterworth_emg (data_frame, lowcut, highcut, data_freq, filter_
 
 def RMS_calculation (EMG_signal, computation_onsets, computation_offsets):
     muscle_RMS = []
-    analysis_window = (computation_offsets[0] - computation_onsets[0])/1000
+    analysis_window = (computation_offsets[0] - computation_onsets[0])
     for i in range(0,len(computation_onsets)):
         st.write(f'onset: {computation_onsets[i]}; offset: {computation_offsets[i]}')
         muscle_RMS.append ((np.sum(np.square(EMG_signal[computation_onsets[i]:computation_offsets[i]]))/analysis_window)**0.5)
