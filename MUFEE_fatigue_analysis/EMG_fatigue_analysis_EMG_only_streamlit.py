@@ -142,6 +142,7 @@ if uploaded_file is not None:
     # Crear figura
     fig2 = px.line(
         RMS,
+        x=['0%', '20%', '40%', '60%', '80%', '100%'],
         title='RMS EMG'
     )
 
