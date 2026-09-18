@@ -131,7 +131,7 @@ if uploaded_file is not None:
     # #######COMPUTATION OF EMG VARIABLES##########
     st.dataframe(filt_data)
     # #Computation of RMS for each test portion
-    biceps_RMS = RMS_calculation (filt_data['chan1'], [pcnt0_emg, pcnt20_emg, pcnt40_emg, pcnt60_emg, pcnt80_emg], [pcnt20_emg, pcnt40_emg, pcnt60_emg, pcnt80_emg, pcnt100_emg])
+    biceps_RMS = RMS_calculation (filt_data, [pcnt0_emg, pcnt20_emg, pcnt40_emg, pcnt60_emg, pcnt80_emg], [pcnt20_emg, pcnt40_emg, pcnt60_emg, pcnt80_emg, pcnt100_emg])
     
     # #Computation of EMG Frequency variables for each contraction   
     RMS = RMS_calculation (filt_data, onsets, offsets)
