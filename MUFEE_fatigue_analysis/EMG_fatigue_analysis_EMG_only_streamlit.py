@@ -144,7 +144,6 @@ if uploaded_file is not None:
     # Crear figura
     fig2 = px.line(
         RMS,
-        y='chan1',
         title='RMS EMG'
     )
 
