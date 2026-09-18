@@ -148,6 +148,20 @@ if uploaded_file is not None:
 
 
     st.plotly_chart(fig2, use_container_width=True)
+    fig3 = px.line(
+        MNF,
+        title='MNF EMG'
+    )
+
+
+    st.plotly_chart(fig3, use_container_width=True)
+    fig4 = px.line(
+        MDF,
+        title='MDF EMG'
+    )
+
+
+    st.plotly_chart(fig4, use_container_width=True)
     # st.table(RMS)
     # st.table(MDF)
     # st.table(MNF)
