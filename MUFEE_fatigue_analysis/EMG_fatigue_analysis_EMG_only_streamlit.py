@@ -115,7 +115,7 @@ if uploaded_file is not None:
         max_value=len(filt_data),
         value=5000)
     
-     emg_total_frames = pcnt100_emg - pcnt0_emg
+    emg_total_frames = pcnt100_emg - pcnt0_emg
     
     pcnt20_emg = int(emg_total_frames*0.2+pcnt0_emg)
     pcnt40_emg = int(emg_total_frames*0.4+pcnt0_emg)
