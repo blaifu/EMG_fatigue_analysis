@@ -7,6 +7,7 @@ import plotly.express as px
 from scipy.signal import butter, lfilter, filtfilt
 from scipy.signal import freqz
 from scipy.signal import periodogram
+from itertools import compress
 
 #FUNCTIONS#
 def butter_bandpass(lowcut, highcut, fs, order, filter_type):
