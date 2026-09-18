@@ -22,8 +22,8 @@ if uploaded_file is not None:
     ax.set_ylabel('EMG')
     ax.set_title('Senyal EMG')
 
-# Mostrar a Streamlit
-st.pyplot(fig)
+    # Mostrar a Streamlit
+    st.pyplot(fig)
     # pcnt0_emg = st.number_input(
     #     "Inici contracció",
     #     min_value=0,
