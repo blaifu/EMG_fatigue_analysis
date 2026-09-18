@@ -49,7 +49,7 @@ def mean_median_frequency_computation (EMG_onsets, EMG_offsets, data_frame_nAbs,
         onset = EMG_onsets[frame]
         offset = EMG_offsets[frame]
         sampling_rate = 1000
-        signal= data_frame_nAbs.iloc[onset:offset]
+        signal= data_frame_nAbs[onset:offset]
         freqs, power = periodogram(signal, fs=sampling_rate, window='hamming')
         ax[row_num][col_num].plot(freqs, power)
         ax[row_num][col_num].set_title('PSD - Stage: ' + str(frame*20) +' to '+str(frame*20+20) +' - '+muscle)
