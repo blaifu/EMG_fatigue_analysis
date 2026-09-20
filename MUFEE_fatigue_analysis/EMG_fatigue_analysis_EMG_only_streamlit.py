@@ -88,12 +88,12 @@ data_freq = st.number_input(
 lowcut = st.number_input(
     "Low cut frequency",
     min_value=0,
-    max_value=data_freq/2,
+    max_value=int(data_freq/2),
     value=0)
 highcut = st.number_input(
     "High cut frequency",
     min_value=0,
-    max_value=data_freq/2,
+    max_value=int(data_freq/2),
     value=0)
 filter_order = 4
 
