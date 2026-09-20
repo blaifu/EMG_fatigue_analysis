@@ -170,7 +170,7 @@ if uploaded_file is not None:
     st.plotly_chart(fig4, use_container_width=True)
     
     #EXPORTACIO
-    export_df = pd.concat([RMS_df, MNF_df, MDF_df], axis=1)
+    export_df = pd.concat([RMS_df, MNF_df['y'], MDF_df['y']], axis=1, names=['Periods', 'RMS', 'MNF', 'MDF'])
 
     output = BytesIO()
     
