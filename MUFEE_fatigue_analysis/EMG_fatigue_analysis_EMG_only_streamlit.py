@@ -96,7 +96,7 @@ highcut = st.number_input(
     max_value=int(data_freq/2),
     value=0)
 filter_order = 4
-
+uploaded_file = None
 if data_freq != 0 and lowcut != 0 and highcut != 0:
     uploaded_file = st.file_uploader(
         "Selecciona el fitxer EMG",
