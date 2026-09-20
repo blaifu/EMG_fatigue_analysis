@@ -78,34 +78,35 @@ def mean_median_frequency_computation (EMG_onsets, EMG_offsets, data_frame_nAbs,
 st.title("EMG FATIGUE ANALYSIS APP")
 
 st.markdown("""Aquesta APP serveig per fer l'anàlisi d'un fitxes d'EMG en tasques de fatiga a través de contraccions continues""")
+st.markdown("""Defineix la freqüència de mostreig i les freqüències de tall a utilitzar per dur a terme el filtre Buterworth de pas de banda.""")
 
+data_freq = st.number_input(
+    "Sampling Frequency",
+    min_value=0,
+    max_value=4000,
+    value=0)
+lowcut = st.number_input(
+    "Low cut frequency",
+    min_value=0,
+    max_value=data_freq/2,
+    value=0)
+highcut = st.number_input(
+    "High cut frequency",
+    min_value=0,
+    max_value=data_freq/2,
+    value=0)
+filter_order = 4
 
-uploaded_file = st.file_uploader(
-    "Selecciona el fitxer EMG",
-    type=["xlsx"]
-)
+if data_freq != 0 and lowcut != 0 and highcut != 0:
+    uploaded_file = st.file_uploader(
+        "Selecciona el fitxer EMG",
+        type=["xlsx"]
+    )
 
 if uploaded_file is not None:
     ##################################
     ########CONSTANTS#################
-    st.markdown("""Defineix la freqüència de mostreig i les freqüències de tall a utilitzar per dur a terme el filtre Buterworth de pas de banda.""")
 
-    data_freq = st.number_input(
-        "Sampling Frequency",
-        min_value=0,
-        max_value=4000,
-        value=0)
-    lowcut = st.number_input(
-        "Low cut frequency",
-        min_value=0,
-        max_value=data_freq/2,
-        value=0)
-    highcut = st.number_input(
-        "High cut frequency",
-        min_value=0,
-        max_value=data_freq/2,
-        value=0)
-    filter_order = 4
 
     
     raw_EMG_data_frame = pd.read_excel(uploaded_file) 
