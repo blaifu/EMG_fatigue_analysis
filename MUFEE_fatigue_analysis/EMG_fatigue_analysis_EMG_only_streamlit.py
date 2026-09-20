@@ -8,6 +8,7 @@ from scipy.signal import butter, lfilter, filtfilt
 from scipy.signal import freqz
 from scipy.signal import periodogram
 from itertools import compress
+from io import BytesIO
 
 #FUNCTIONS#
 def butter_bandpass(lowcut, highcut, fs, order, filter_type):
@@ -167,14 +168,25 @@ if uploaded_file is not None:
 
 
     st.plotly_chart(fig4, use_container_width=True)
-    # st.table(RMS)
-    # st.table(MDF)
-    # st.table(MNF)
-    # ########EXPORTING VARIABLES#########
     
+    #EXPORTACIO
+    export_df = pd.concat([RMS_df, MNF_df, MDF_df], axis=1)
+
+    output = BytesIO()
     
-    # export_df = pd.DataFrame({'Biceps_RMS_per_stage': biceps_RMS,
-    #                           'Biceps_MNF_per_stage': biceps_MNF,
-    #                           'Biceps_MDF_per_stage': biceps_MDF
-    #                           })
-    # xls_df_export_concurrent(export_df, export_file)
+    with pd.ExcelWriter(output, engine='openpyxl') as writer:
+        export_df.to_excel(
+            writer,
+            sheet_name='Results',
+            index=False
+        )
+    
+    output.seek(0)
+    
+    #Botó descàrrega
+    st.download_button(
+    label="Descarregar resultats",
+    data=output.getvalue(),
+    file_name="EMG_fatigue_results.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
