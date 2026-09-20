@@ -68,12 +68,6 @@ def mean_median_frequency_computation (EMG_onsets, EMG_offsets, data_frame_nAbs,
             row_num = 0
             col_num = col_num + 1
     return pd.DataFrame({'x': ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%'], 'y':mean_freq_data}), pd.DataFrame({'x': ['0-20%', '20-40%', '40-60%', '60-80%', '80-100%'], 'y':median_freq_data})
-##################################
-########CONSTANTS#################
-data_freq = 1000.0
-lowcut = 20.0
-highcut = 400.0
-filter_order = 4
 
 
 
@@ -92,6 +86,28 @@ uploaded_file = st.file_uploader(
 )
 
 if uploaded_file is not None:
+    ##################################
+    ########CONSTANTS#################
+    st.markdown("""Defineix la freqüència de mostreig i les freqüències de tall a utilitzar per dur a terme el filtre Buterworth de pas de banda.""")
+
+    data_freq = st.number_input(
+        "Sampling Frequency",
+        min_value=0,
+        max_value=4000,
+        value=0)
+    lowcut = st.number_input(
+        "Low cut frequency",
+        min_value=0,
+        max_value=data_freq/2,
+        value=0)
+    highcut = st.number_input(
+        "High cut frequency",
+        min_value=0,
+        max_value=data_freq/2,
+        value=0)
+    filter_order = 4
+
+    
     raw_EMG_data_frame = pd.read_excel(uploaded_file) 
     #FILTRATGE DADES
     filt_data = data_filter_butterworth_emg(raw_EMG_data_frame['chan1'], lowcut, highcut, data_freq, filter_order)
