@@ -78,7 +78,7 @@ def mean_median_frequency_computation (EMG_onsets, EMG_offsets, data_frame_nAbs,
 st.title("EMG FATIGUE ANALYSIS APP")
 
 st.markdown("""Aquesta APP serveig per fer l'anàlisi d'un fitxes d'EMG en tasques de fatiga a través de contraccions continues""")
-st.markdown("""Defineix la freqüència de mostreig i les freqüències de tall a utilitzar per dur a terme el filtre Buterworth de pas de banda.""")
+st.markdown("""\nDefineix la freqüència de mostreig i les freqüències de tall a utilitzar per dur a terme el filtre Buterworth de pas de banda.""")
 
 data_freq = st.number_input(
     "Sampling Frequency",
@@ -110,7 +110,6 @@ if uploaded_file is not None:
 
     
     raw_EMG_data_frame = pd.read_excel(uploaded_file) 
-    raw_EMG_data_frame = ((raw_EMG_data_frame / 1024) - 0.5) * (3.3 / 1009) * 1000
     #FILTRATGE DADES
     filt_data = data_filter_butterworth_emg(raw_EMG_data_frame['chan1'], lowcut, highcut, data_freq, filter_order)
     
