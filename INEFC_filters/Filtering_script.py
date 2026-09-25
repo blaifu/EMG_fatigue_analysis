@@ -87,7 +87,7 @@ if uploaded_file is not None:
     #FILTRATGE DADES
     dict_export = {}
     for col in raw_data:
-        dict_export[col] = data_filter_butterworth_emg(raw_data, lowcut, highcut, data_freq, filter_order, filter_type)
+        dict_export[col] = data_filter_butterworth_emg(raw_data[col], lowcut, highcut, data_freq, filter_order, filter_type)
     
    
     
