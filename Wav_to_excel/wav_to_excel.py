@@ -77,48 +77,48 @@ uploaded_file = st.file_uploader("Selecciona el fitxer EMG", type=["xlsx"])
 if uploaded_file is not None:
 
 
-#transform multichannel wav to single channel wav
-wav = wave.open(uploaded_file)
-chan_n = wav.getnchannels()
-wav_file_list = []
-if chan_n>0:
-    chan1 = save_wav_channel(path+filename.split('.')[0]+'_chan1.wav', wav, 0)
-    wav_file_list.append(path+filename.split('.')[0]+'_chan1.wav')
-if chan_n>1:
-    chan2 = save_wav_channel(path+filename.split('.')[0]+'_chan2.wav', wav, 1)
-    wav_file_list.append(path+filename.split('.')[0]+'_chan2.wav')
-if chan_n>2:
-    chan3 = save_wav_channel(path+filename.split('.')[0]+'_chan3.wav', wav, 2)
-    wav_file_list.append(path+filename.split('.')[0]+'_chan3.wav')
-if chan_n>3:
-    chan4 = save_wav_channel(path+filename.split('.')[0]+'_chan4.wav', wav, 3)
-    wav_file_list.append(path+filename.split('.')[0]+'_chan4.wav')
-wav.close()
-#downsample to 1000Hz
-chan_dict={}
-for file in wav_file_list:
-    original_wave = transform_and_plot_wav(file)
-    sound = am.from_file(file, format='wav', frame_rate=44100)
-    sound = sound.set_frame_rate(1000)
-    sound.export(file, format='wav')
-    one_khz_wave = transform_and_plot_wav(file)
-    chan_dict[file[-9:-4]] = one_khz_wave
-
-export_df = pd.DataFrame (chan_dict)
-output = BytesIO()
-
-with pd.ExcelWriter(output, engine='openpyxl') as writer:
-    export_df.to_excel(
-        writer,
-        sheet_name='Results',
-        index=False
-    )
-
-output.seek(0)
-
-#Botó descàrrega
-st.download_button(
-label="Descarregar resultats",
-data=output.getvalue(),
-file_name="Wav_transformed_to_Excel.xlsx",
-mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    #transform multichannel wav to single channel wav
+    wav = wave.open(uploaded_file)
+    chan_n = wav.getnchannels()
+    wav_file_list = []
+    if chan_n>0:
+        chan1 = save_wav_channel(path+filename.split('.')[0]+'_chan1.wav', wav, 0)
+        wav_file_list.append(path+filename.split('.')[0]+'_chan1.wav')
+    if chan_n>1:
+        chan2 = save_wav_channel(path+filename.split('.')[0]+'_chan2.wav', wav, 1)
+        wav_file_list.append(path+filename.split('.')[0]+'_chan2.wav')
+    if chan_n>2:
+        chan3 = save_wav_channel(path+filename.split('.')[0]+'_chan3.wav', wav, 2)
+        wav_file_list.append(path+filename.split('.')[0]+'_chan3.wav')
+    if chan_n>3:
+        chan4 = save_wav_channel(path+filename.split('.')[0]+'_chan4.wav', wav, 3)
+        wav_file_list.append(path+filename.split('.')[0]+'_chan4.wav')
+    wav.close()
+    #downsample to 1000Hz
+    chan_dict={}
+    for file in wav_file_list:
+        original_wave = transform_and_plot_wav(file)
+        sound = am.from_file(file, format='wav', frame_rate=44100)
+        sound = sound.set_frame_rate(1000)
+        sound.export(file, format='wav')
+        one_khz_wave = transform_and_plot_wav(file)
+        chan_dict[file[-9:-4]] = one_khz_wave
+    
+    export_df = pd.DataFrame (chan_dict)
+    output = BytesIO()
+    
+    with pd.ExcelWriter(output, engine='openpyxl') as writer:
+        export_df.to_excel(
+            writer,
+            sheet_name='Results',
+            index=False
+        )
+    
+    output.seek(0)
+    
+    #Botó descàrrega
+    st.download_button(
+    label="Descarregar resultats",
+    data=output.getvalue(),
+    file_name="Wav_transformed_to_Excel.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
