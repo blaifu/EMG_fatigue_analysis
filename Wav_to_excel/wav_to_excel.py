@@ -121,4 +121,4 @@ if uploaded_file is not None:
     label="Descarregar resultats",
     data=output.getvalue(),
     file_name="Wav_transformed_to_Excel.xlsx",
-    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
